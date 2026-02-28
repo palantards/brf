@@ -20,10 +20,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "BRF Manager - Enklare administration för bostadsrättsföreningar",
+  title: "Goatchu - Enklare administration för bostadsrättsföreningar",
   description: "Digitalisera din BRF. Spara tid på styrelsearbete med verktyg för felanmälan, dokumentarkiv och kommunikation med boende.",
   openGraph: {
-    title: "BRF Manager - Enklare administration för bostadsrättsföreningar",
+    title: "Goatchu - Enklare administration för bostadsrättsföreningar",
     description: "Ett enkelt verktyg som gör styrelsearbetet smidigare. Hantera felanmälningar, dokument och kommunikation med boende på ett ställe.",
     type: "website",
     locale: "sv_SE",

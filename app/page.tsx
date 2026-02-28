@@ -501,7 +501,14 @@ export default function Home() {
       <footer className="bg-black border-t border-white/10 py-8 md:py-12">
         <div className="container mx-auto px-6 text-center">
           <p className="text-gray-400 text-sm md:text-base">
-            © 2026 BRF Manager. Byggt i Sverige, för svenska BRF:er.
+            © 2026{" "}
+            <a
+              href="https://goatchu.com"
+              className="text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              Goatchu
+            </a>
+            . Byggt i Sverige, för svenska BRF:er.
           </p>
         </div>
       </footer>
