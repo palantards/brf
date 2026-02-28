@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,11 +60,26 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
 export default function Home() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email submitted:", email);
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      setError("Något gick fel. Försök igen.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -151,22 +166,22 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    disabled={loading}
                     className="w-full h-14 sm:flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400 backdrop-blur-sm rounded-xl text-base"
                   />
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={loading}
                       className="w-full sm:w-auto h-14 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-8 rounded-xl shadow-lg shadow-blue-500/50 transition-all duration-200"
                     >
-                      Anmäl intresse
-                      <ArrowRight className="ml-2 w-5 h-5" />
+                      {loading ? "Skickar..." : "Anmäl intresse"}
+                      {!loading && <ArrowRight className="ml-2 w-5 h-5" />}
                     </Button>
                   </motion.div>
                 </div>
+                {error && <p className="text-red-400 text-sm mt-3">{error}</p>}
               </motion.form>
             ) : (
               <motion.div
@@ -450,21 +465,21 @@ export default function Home() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    disabled={loading}
                     className="w-full sm:flex-1 h-14 bg-white text-black placeholder:text-gray-600 rounded-xl text-base"
                   />
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={loading}
                       className="w-full sm:w-auto h-14 bg-black text-white hover:bg-gray-900 font-semibold px-8 rounded-xl transition-all duration-200"
                     >
-                      Anmäl intresse
+                      {loading ? "Skickar..." : "Anmäl intresse"}
                     </Button>
                   </motion.div>
                 </div>
+                {error && <p className="text-red-300 text-sm mt-3">{error}</p>}
               </form>
             ) : (
               <motion.div
