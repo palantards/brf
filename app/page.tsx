@@ -39,7 +39,13 @@ const scaleIn = {
 };
 
 // Component for scroll-triggered animations
-function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function AnimatedSection({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -129,7 +135,9 @@ export default function Home() {
               className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-full mb-8 border border-white/20"
             >
               <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium">Snart lansering – Anmäl ditt intresse</span>
+              <span className="text-sm font-medium">
+                Snart lansering – Anmäl ditt intresse
+              </span>
             </motion.div>
 
             <motion.h1
@@ -169,7 +177,10 @@ export default function Home() {
                     disabled={loading}
                     className="w-full h-14 sm:flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400 backdrop-blur-sm rounded-xl text-base"
                   />
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       type="submit"
                       size="lg"
@@ -196,8 +207,12 @@ export default function Home() {
               </motion.div>
             )}
 
-            <motion.p variants={fadeInUp} className="text-sm text-gray-400 px-4">
-              Vi söker 10 BRF:er i Stockholm/Göteborg som vill vara med från start
+            <motion.p
+              variants={fadeInUp}
+              className="text-sm text-gray-400 px-4"
+            >
+              Vi söker 10 BRF:er i Stockholm/Göteborg som vill vara med från
+              start
             </motion.p>
           </motion.div>
         </div>
@@ -216,7 +231,7 @@ export default function Home() {
           </AnimatedSection>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 md:auto-rows-fr gap-4 md:gap-6 max-w-6xl mx-auto"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -227,36 +242,43 @@ export default function Home() {
                 icon: AlertCircle,
                 gradient: "from-red-500 to-pink-500",
                 title: "Kaos vid styrelsebyten",
-                description: "När nya ledamöter kommer in försvinner kunskap. Dokumenten är utspridda i mejl, mappar och Google Drive.",
+                description:
+                  "När nya ledamöter kommer in försvinner kunskap. Dokumenten är utspridda i mejl, mappar och Google Drive.",
               },
               {
                 icon: Clock,
                 gradient: "from-orange-500 to-yellow-500",
                 title: "För mycket administration",
-                description: "Obetalda volontärer spenderar timmar på att hantera felanmälningar, svara på frågor och leta dokument.",
+                description:
+                  "Obetalda volontärer spenderar timmar på att hantera felanmälningar, svara på frågor och leta dokument.",
               },
               {
                 icon: MessageSquare,
                 gradient: "from-purple-500 to-blue-500",
                 title: "Fragmenterad kommunikation",
-                description: "Mejl, Facebook, papperslappar i trapphuset. Ingen vet var man hittar information.",
+                description:
+                  "Mejl, Facebook, papperslappar i trapphuset. Ingen vet var man hittar information.",
               },
             ].map((item, index) => (
-              <motion.div key={index} variants={scaleIn}>
+              <motion.div key={index} variants={scaleIn} className="h-full">
                 <motion.div
+                  className="h-full"
                   whileHover={{ scale: 1.05, y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 h-full group">
-                    <CardContent className="pt-8 pb-8 px-6">
+                  <Card className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 h-full min-h-[260px] group">
+                    <CardContent className="pt-8 pb-8 px-6 h-full flex flex-col">
                       <motion.div
                         className={`w-14 h-14 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-6`}
-                        whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                        whileHover={{
+                          rotate: [0, -10, 10, -10, 0],
+                          scale: 1.1,
+                        }}
                         transition={{ duration: 0.5 }}
                       >
                         <item.icon className="w-7 h-7 text-white" />
                       </motion.div>
-                      <h3 className="text-lg sm:text-xl font-semibold mb-3">
+                      <h3 className="text-lg sm:text-xl font-semibold mb-3 text-white">
                         {item.title}
                       </h3>
                       <p className="text-gray-400 leading-relaxed text-base">
@@ -309,25 +331,29 @@ export default function Home() {
                 icon: AlertCircle,
                 gradient: "from-blue-500 to-cyan-500",
                 title: "Felanmälan",
-                description: "Boende rapporterar problem direkt i systemet. Styrelsen ser allt på ett ställe, kan tilldela ansvar och spåra status. Ingen mer mejlröra.",
+                description:
+                  "Boende rapporterar problem direkt i systemet. Styrelsen ser allt på ett ställe, kan tilldela ansvar och spåra status. Ingen mer mejlröra.",
               },
               {
                 icon: FileText,
                 gradient: "from-green-500 to-emerald-500",
                 title: "Dokumentarkiv",
-                description: "Stadgar, årsredovisningar, protokoll, försäkringsbrev. Strukturerat, sökbart och tillgängligt för nya styrelseledamöter.",
+                description:
+                  "Stadgar, årsredovisningar, protokoll, försäkringsbrev. Strukturerat, sökbart och tillgängligt för nya styrelseledamöter.",
               },
               {
                 icon: MessageSquare,
                 gradient: "from-purple-500 to-pink-500",
                 title: "Digital anslagstavla",
-                description: "Skicka meddelanden till alla boende. Automatiska mejlnotiser. Ingen mer papperslappar som ingen läser.",
+                description:
+                  "Skicka meddelanden till alla boende. Automatiska mejlnotiser. Ingen mer papperslappar som ingen läser.",
               },
               {
                 icon: Users,
                 gradient: "from-orange-500 to-red-500",
                 title: "Boenderegistret",
-                description: "Håll koll på vem som bor var, kontaktuppgifter och in-/utflyttningar. Alltid uppdaterat.",
+                description:
+                  "Håll koll på vem som bor var, kontaktuppgifter och in-/utflyttningar. Alltid uppdaterat.",
               },
             ].map((item, index) => (
               <motion.div key={index} variants={fadeInUp}>
@@ -420,31 +446,33 @@ export default function Home() {
 
       {/* Final CTA */}
       <section className="py-16 md:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/10 to-black pointer-events-none" />
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 opacity-90"
+          className="absolute top-0 right-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-500/30 rounded-full blur-[100px] md:blur-[120px] pointer-events-none"
           animate={{
-            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            x: [0, 30, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-purple-500/20 rounded-full blur-[100px] md:blur-[120px] pointer-events-none"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
           }}
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
-          style={{ backgroundSize: "200% 200%" }}
         />
-
-        <div className="absolute top-0 left-0 w-full h-full">
-          <motion.div
-            className="absolute top-10 left-10 w-48 md:w-72 h-48 md:h-72 bg-white/10 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          />
-          <motion.div
-            className="absolute bottom-10 right-10 w-64 md:w-96 h-64 md:h-96 bg-white/10 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 5, repeat: Infinity }}
-          />
-        </div>
 
         <div className="relative container mx-auto px-6 text-center">
           <AnimatedSection>
@@ -453,11 +481,12 @@ export default function Home() {
             </h2>
             <p className="text-lg sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed px-4">
               Vi söker 10 BRF-styrelser i Stockholm/Göteborg som vill hjälpa oss
-              bygga rätt verktyg från början. Testa gratis och påverka hur det blir.
+              bygga rätt verktyg från början. Testa gratis och påverka hur det
+              blir.
             </p>
 
             {!submitted ? (
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto px-4">
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-6 px-4">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Input
                     type="email"
@@ -466,14 +495,17 @@ export default function Home() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={loading}
-                    className="w-full sm:flex-1 h-14 bg-white text-black placeholder:text-gray-600 rounded-xl text-base"
+                    className="w-full h-14 sm:flex-1 bg-white/10 border-white/20 text-white placeholder:text-gray-400 backdrop-blur-sm rounded-xl text-base"
                   />
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       type="submit"
                       size="lg"
                       disabled={loading}
-                      className="w-full sm:w-auto h-14 bg-black text-white hover:bg-gray-900 font-semibold px-8 rounded-xl transition-all duration-200"
+                      className="w-full sm:w-auto h-14 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold px-8 rounded-xl shadow-lg shadow-blue-500/50 transition-all duration-200"
                     >
                       {loading ? "Skickar..." : "Anmäl intresse"}
                     </Button>
